@@ -1,0 +1,52 @@
+<div class="wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-6">
+        <img
+          src="../../assets/login.png"
+          alt="Image Description"
+          class="image"
+        />
+      </div>
+      <div class="col-6 d-flex align-items-center">
+        <div class="d-flex flex-column w-100">
+          <h3 class="">Login</h3>
+          <form #loginForm="ngForm" (ngSubmit)="login()">
+            <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label"
+                >Email address</label
+              >
+              <input
+                #email="ngModel"
+                [(ngModel)]="credentials.email"
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                name="email"
+                type="email"
+                class="form-control"
+                placeholder="name@example.com"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label"
+                >Email address</label
+              >
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                placeholder="Enter Password"
+                [(ngModel)]="credentials.password"
+                #password="ngModel"
+                name="password"
+              />
+            </div>
+            <button type="submit" class="btn btn-primary w-100 mt-3">
+              Login
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

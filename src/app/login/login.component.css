@@ -1,0 +1,27 @@
+.wrapper {
+  min-height: 80%;
+  /* You can add padding or margins here for spacing between the footer and main content if needed */
+}
+
+.container {
+  max-width: 1140px; /* Set your desired maximum width for the container */
+  margin: 0 auto; /* Center the container horizontally by setting left and right margins to auto */
+  padding: 20px; /* Add optional padding to the container if desired */
+}
+
+.row {
+  display: flex;
+  width: 100%;
+}
+
+.column {
+  flex: 1;
+  padding: 20px; /* Optional: Add padding between the columns */
+  box-sizing: border-box; /* Optional: Include padding in the column's width calculation */
+}
+
+.image {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+}
