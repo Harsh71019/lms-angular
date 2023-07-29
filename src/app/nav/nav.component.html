@@ -7,11 +7,30 @@
       >Home</a
     >
   </li>
+  <li style="float: right">
+    <a
+      routerLink="/register"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      *ngIf="!(auth.isAuthenticated$ | async)"
+      >Register</a
+    >
+  </li>
+  <li style="float: right">
+    <a
+      routerLink="/login"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      *ngIf="!(auth.isAuthenticated$ | async)"
+      >Login</a
+    >
+  </li>
   <li>
     <a
       routerLink="/profile"
       routerLinkActive="active"
       [routerLinkActiveOptions]="{ exact: true }"
+      *ngIf="auth.isAuthenticated$ | async"
       >Profile</a
     >
   </li>
@@ -20,6 +39,7 @@
       routerLink="/timesheet"
       routerLinkActive="active"
       [routerLinkActiveOptions]="{ exact: true }"
+      *ngIf="auth.isAuthenticated$ | async"
       >Timesheet</a
     >
   </li>
@@ -28,32 +48,28 @@
       routerLink="/expenses"
       routerLinkActive="active"
       [routerLinkActiveOptions]="{ exact: true }"
+      *ngIf="auth.isAuthenticated$ | async"
       >Expenses</a
     >
   </li>
   <li>
     <a
-      routerLink="tasks"
+      routerLink="/tasks"
       routerLinkActive="active"
       [routerLinkActiveOptions]="{ exact: true }"
+      *ngIf="auth.isAuthenticated$ | async"
       >Tasks</a
     >
   </li>
 
   <li style="float: right">
     <a
-      routerLink="/login"
+      routerLink="/"
       routerLinkActive="active"
       [routerLinkActiveOptions]="{ exact: true }"
-      >Login</a
-    >
-  </li>
-  <li style="float: right">
-    <a
-      routerLink="/register"
-      routerLinkActive="active"
-      [routerLinkActiveOptions]="{ exact: true }"
-      >Register</a
+      *ngIf="auth.isAuthenticated$ | async"
+      (click)="auth.logout()"
+      >Logout</a
     >
   </li>
 </ul>

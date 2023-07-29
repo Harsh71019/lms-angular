@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthenticationService } from '../_service/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -6,14 +7,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
+  constructor(private auth: AuthenticationService) {}
+  inSubmission = false;
+
   credentials = {
     email: '',
     password: '',
   };
 
   async login() {
-    console.log('Done');
-    console.log(this.credentials);
+    this.auth.login(this.credentials.email, this.credentials.password);
   }
   ngOnInit(): void {}
 }
