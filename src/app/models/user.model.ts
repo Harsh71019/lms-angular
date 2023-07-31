@@ -5,11 +5,9 @@ export default class IUser {
   password?: string | null;
   confirm_password?: string | null;
   phoneNumber?: string | null;
-  dob?: Date;
-  dateOfJoining?: Date;
+  dob?: Date | undefined;
+  dateOfJoining?: Date | undefined;
   location?: string;
   designation?: string;
   department?: string;
-  isAdmin?: boolean;
-  resetLink?: string;
 }

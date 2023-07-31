@@ -1,0 +1,32 @@
+<input
+  [formControl]="control"
+  [type]="type"
+  class="form-control"
+  [placeholder]="placeholder"
+  [mask]="format"
+  [dropSpecialCharacters]="false"
+/>
+<ng-container *ngIf="control.touched && control.dirty">
+  <p class="text-danger" *ngIf="control?.errors?.['pattern']">
+    Minimum eight characters, at least one uppercase letter, one lowercase
+    letter, one number and one special character
+  </p>
+  <p class="text-danger" *ngIf="control?.errors?.['required']">
+    Field is required
+  </p>
+  <p class="text-danger" *ngIf="control?.errors?.['minlength']">
+    Please enter atleast 3 letters
+  </p>
+  <p class="text-danger" *ngIf="control?.errors?.['email']">
+    Please enter a valid email
+  </p>
+  <p class="text-danger" *ngIf="control?.errors?.['noMatch']">
+    Password do not match
+  </p>
+  <!-- <p class="text-danger" *ngIf="control?.errors?.['mobile'].minlength">
+    Enter exactly 10 characters
+  </p>
+  <p class="text-danger" *ngIf="control?.errors?.['mobile'].maxLength">
+    Enter exactly 10 characters
+  </p> -->
+</ng-container>

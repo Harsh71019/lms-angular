@@ -15,6 +15,7 @@ import { AlertComponent } from './alert/alert.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,8 @@ import { HttpClientModule } from '@angular/common/http';
     TasksComponent,
     AlertComponent,
   ],
+  providers: [PermissionsService],
+  bootstrap: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -35,8 +38,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     ToastrModule.forRoot(),
     HttpClientModule,
+    SharedModule,
   ],
-  providers: [PermissionsService],
-  bootstrap: [AppComponent],
 })
 export class AppModule {}

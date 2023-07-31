@@ -62,6 +62,32 @@ export class AuthenticationService {
       console.log(error);
     }
   }
+  async register(form: IUser) {
+    if (!form.email) {
+      throw new Error('Email not provided');
+    }
+
+    try {
+      this.http
+        .post<any>(`api/users`, form)
+        .pipe(
+          catchError((error) => {
+            if (error) {
+              this.toastr.error(JSON.stringify(error));
+            }
+            return throwError(error);
+          })
+        )
+        .subscribe((data) => {
+          this.toastr.success('Register Successfull');
+          localStorage.setItem('currentUser', JSON.stringify(data));
+          this.updateCurrentUserValue();
+          this._router.navigate(['']);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  }
   logout() {
     this.toastr.success('Logout Successfull');
     localStorage.removeItem('currentUser');
