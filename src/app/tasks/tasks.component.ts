@@ -1,6 +1,8 @@
 import { ModalService } from 'src/app/services/modal.service';
-import { Component, Input } from '@angular/core';
+import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { TaskService } from '../_service/task.service';
+import ITask from '../models/task.model';
 
 @Component({
   selector: 'app-tasks',
@@ -8,55 +10,50 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./tasks.component.css'],
 })
 export class TasksComponent {
+  @Output() taskCreated = new EventEmitter<void>(); // Declare the event emitter
+  task: ITask[] = [];
+  constructor(
+    protected modalService: ModalService,
+    public taskService: TaskService
+  ) {}
+
   inSubmission = false;
-  title = new FormControl<string>('', [
-    Validators.required,
-    Validators.minLength(3),
-  ]);
+  taskCreds = {
+    title: '',
+    priority: '',
+    description: '',
+    details: '',
+    duration: '',
+    company: '',
+    status: '',
+  };
 
-  description = new FormControl<string>('', [
-    Validators.required,
-    Validators.minLength(3),
-  ]);
-
-  details = new FormControl<string>('', [
-    Validators.required,
-    Validators.minLength(3),
-  ]);
-
-  company = new FormControl<string>('', [
-    Validators.required,
-    Validators.minLength(3),
-  ]);
-
-  status = new FormControl<string>('', [
-    Validators.required,
-    Validators.minLength(3),
-  ]);
-
-  priority = new FormControl<string>('', [
-    Validators.required,
-    Validators.minLength(3),
-  ]);
-
-  duration = new FormControl<string>('', [
-    Validators.required,
-    Validators.minLength(3),
-  ]);
-
-  taskForm = new FormGroup({
-    title: this.title, //
-    description: this.description, //
-    details: this.details, //
-    company: this.company, //
-    status: this.status, //
-    priority: this.priority, //
-    duration: this.duration, //
-  });
-
-  submit() {
-    console.log(this.taskForm.value);
-    // this.auth.register(this.taskForm.value);
+  ngOnInit() {
+    this.refreshTasks(); // Initial fetch of tasks
   }
-  constructor(protected modalService: ModalService) {}
+
+  async submit() {
+    await this.taskService.createTask(this.taskCreds);
+    // Optionally reset the form or do other tasks after successful submission
+    this.taskCreds = {
+      title: '',
+      priority: '',
+      description: '',
+      details: '',
+      duration: '',
+      company: '',
+      status: '',
+    };
+    await this.refreshTasks();
+  }
+
+  onTaskEdited() {
+    // Refresh tasks after editing
+    this.refreshTasks();
+  }
+
+  async refreshTasks() {
+    this.task = await this.taskService.getTasks();
+    console.log(this.task.length, 'Refresh task');
+  }
 }

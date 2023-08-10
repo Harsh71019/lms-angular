@@ -16,6 +16,9 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
+import { BoardComponent } from './tasks/board/board.component';
+import { FilterTasksByStatusPipe } from './pipes/filter-tasks-by-status.pipe';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,8 @@ import { SharedModule } from './shared/shared.module';
     HomeComponent,
     TasksComponent,
     AlertComponent,
+    BoardComponent,
+    FilterTasksByStatusPipe,
   ],
   providers: [PermissionsService],
   bootstrap: [AppComponent],
@@ -39,6 +44,7 @@ import { SharedModule } from './shared/shared.module';
     ToastrModule.forRoot(),
     HttpClientModule,
     SharedModule,
+    DragDropModule,
   ],
 })
 export class AppModule {}

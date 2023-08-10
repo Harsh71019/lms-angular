@@ -13,7 +13,7 @@ import { BehaviorSubject } from 'rxjs';
 export class AuthenticationService {
   public isAuthenticated$: Observable<boolean>;
   public isAuthenticatedWithDelay$: Observable<boolean>;
-  currentUserSubject = new BehaviorSubject<boolean>(
+  public currentUserSubject = new BehaviorSubject<boolean>(
     localStorage.getItem('currentUser') !== null
   );
 
