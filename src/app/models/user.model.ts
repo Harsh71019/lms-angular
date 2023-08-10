@@ -10,4 +10,5 @@ export default class IUser {
   location?: string;
   designation?: string;
   department?: string;
+  token: any;
 }

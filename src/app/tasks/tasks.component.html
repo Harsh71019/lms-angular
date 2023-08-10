@@ -1,3 +1,147 @@
 <div class="wrapper">
-  <p>tasks works!</p>
+  <div class="container">
+    <div class="d-flex justify-content-between mt-3">
+      <h3>Tasks</h3>
+      <button class="btn btn-primary" (click)="modalService.open('task')">
+        Create
+      </button>
+    </div>
+
+    <app-board (taskEdited)="onTaskEdited()" [tasks]="task"></app-board>
+
+    <modal id="task">
+      <div class="modal-header">
+        <h5 class="modal-title">Create Tasks</h5>
+        <button
+          type="button"
+          class="btn-close"
+          (click)="modalService.close()"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form #taskForm="ngForm" (ngSubmit)="submit()" class="row">
+          <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input
+              #title="ngModel"
+              [(ngModel)]="taskCreds.title"
+              name="title"
+              type="title"
+              class="form-control"
+              placeholder="Enter title of Task"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="details" class="form-label">Details</label>
+            <input
+              #details="ngModel"
+              [(ngModel)]="taskCreds.details"
+              name="details"
+              type="details"
+              class="form-control"
+              placeholder="Enter details of Task"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea
+              #description="ngModel"
+              [(ngModel)]="taskCreds.description"
+              name="description"
+              type="description"
+              class="form-control"
+              placeholder="Enter description of Task"
+              required
+              rows="5"
+            >
+            </textarea>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group">
+                <label for="company">Company</label>
+                <select
+                  #company="ngModel"
+                  [(ngModel)]="taskCreds.company"
+                  class="form-control"
+                  id="company"
+                  required
+                  name="company"
+                >
+                  <option value="Contentstack">Contentstack</option>
+                  <option value="IBM">IBM</option>
+                  <option value="Google">Google</option>
+                  <option value="Apple">Apple</option>
+                  <option value="Capgemini">Capgemini</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label for="exampleFormControlSelect1">Priority</label>
+                <select
+                  #priority="ngModel"
+                  [(ngModel)]="taskCreds.priority"
+                  class="form-control"
+                  id="priority"
+                  required
+                  name="priority"
+                >
+                  <option value="Critical">Critical</option>
+                  <option value="High">High</option>
+                  <option value="Medium">Medium</option>
+                  <option value="Low">Low</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3 mb-3">
+            <div class="col-6">
+              <div class="form-group">
+                <label for="status">Status</label>
+                <select
+                  #status="ngModel"
+                  [(ngModel)]="taskCreds.status"
+                  class="form-control"
+                  id="status"
+                  required
+                  name="status"
+                >
+                  <option value="Done">Done</option>
+                  <option value="InProgress">InProgress</option>
+                  <option value="Blocked">Blocked</option>
+                  <option value="QA">QA</option>
+                  <option value="Todo">Todo</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label for="duration">Duration</label>
+                <input
+                  type="date"
+                  #duration="ngModel"
+                  [(ngModel)]="taskCreds.duration"
+                  class="form-control"
+                  id="date"
+                  name="date"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="submit"
+              class="btn btn-primary"
+              [disabled]="taskForm.invalid || inSubmission"
+            >
+              Save and Close
+            </button>
+          </div>
+        </form>
+      </div>
+    </modal>
+  </div>
 </div>
